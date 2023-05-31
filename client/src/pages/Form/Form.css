@@ -1,0 +1,76 @@
+@import "../../index.css";
+
+.form-wrapper {
+  color: #fff;
+  width: 40%;
+  margin: 100px auto 50px;
+  height: 500px;
+  background-color: var(--black);
+  border-radius: 10px;
+  position: relative;
+}
+
+.form-wrapper p {
+  font-size: 13px;
+}
+
+.form-wrapper h2 {
+  margin-bottom: 70px;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-form h2 {
+  font-size: 30px;
+}
+
+.form-input {
+  width: 60%;
+  height: 35px;
+  margin-bottom: 30px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 15px;
+  color: white;
+}
+
+#file-input {
+  width: 30%;
+  margin-top: 40px;
+  border: 1px solid white;
+  border-radius: 15px;
+  background-color: transparent;
+}
+
+#submit-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: auto 30px 20px auto;
+  width: 70px;
+  height: 30px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 20px;
+  color: white;
+}
+
+#submit-button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .form-wrapper {
+    width: 70%;
+  }
+
+  .add-form h2 {
+    font-size: 20px;
+  }
+}
