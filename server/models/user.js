@@ -15,12 +15,12 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  status: {
-    type: String
+  isPremium: {
+    type: Boolean
   }
 })
 
-UserSchema.statics.signup = async function (username, password, role, status) {
+UserSchema.statics.signup = async function (username, password, role) {
   if (!username || !password) {
     throw Error('All fields must be filled')
   }
@@ -34,7 +34,7 @@ UserSchema.statics.signup = async function (username, password, role, status) {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ username, password: hash, role, status });
+  const user = await this.create({ username, password: hash, role, isPremium: false });
 
   return user;
 }
