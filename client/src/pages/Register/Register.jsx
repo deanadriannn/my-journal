@@ -15,7 +15,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    await signup(username, password, role)
+    await signup(username, password, role, 'standard')
   }
   return (
     <div className="register-wrapper">

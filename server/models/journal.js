@@ -18,6 +18,10 @@ const JournalSchema = mongoose.Schema({
   },
   file_id: {
     type: String
+  },
+  isPremium: {
+    type: Boolean,
+    required: true
   }
 }, { timestamps: true });
 

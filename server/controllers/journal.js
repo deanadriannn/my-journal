@@ -1,6 +1,5 @@
 // journalController
 import Journal from '../models/journal.js';
-import User from '../models/user.js';
 import { v2 as cloudinary } from 'cloudinary';
 import cloudinaryConfig from '../middleware/cloudinary.config.js';
 
@@ -42,7 +41,8 @@ export const createJournal = async (req, res) => {
     author: req.body.author,
     pdf: req.file.path,
     user_id,
-    file_id: req.file.filename
+    file_id: req.file.filename,
+    isPremium: req.body.isPremium
   })
 
   try {
