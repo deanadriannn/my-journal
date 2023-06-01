@@ -80,11 +80,12 @@ const Home = ({ searchValue }) => {
             )}
           </div>
         ))}
-        {user.role === 'penulis' ? (
+        {user.role === 'penulis' && (
           <Link to="/form">
             <img src={plusIcon} className="plus-icon" />
           </Link>
-        ) : (
+        )}
+        {!user.isPremium && (
           <Link to="/premium">
             <img src={premium} className="premium-icon" />
           </Link>
