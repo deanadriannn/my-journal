@@ -11,24 +11,25 @@ export const loginUser = async (req, res) => {
 
   try {
     const user = await User.login(username, password);
+    const role = user.role
 
     const token = createToken(user._id);
 
-    res.status(200).json({ username, token })
+    res.status(200).json({ username, token, role })
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 }
 
 export const signupUser = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, role } = req.body;
 
   try {
-    const user = await User.signup(username, password);
+    const user = await User.signup(username, password, role);
 
     const token = createToken(user._id);
 
-    res.status(200).json({ username, token })
+    res.status(200).json({ username, token, role })
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

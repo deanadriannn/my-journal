@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Navbar } from './components'
-import { Home, Login, Form, Profile, Journal, Register } from './pages'
+import { Home, Login, Form, Profile, Journal, Register, Premium } from './pages'
 import { useAuthContext } from './hooks/useAuthContext'
 
 const App = () => {
@@ -42,6 +42,10 @@ const App = () => {
           <Route
             path="/register"
             element={!user ? <Register /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/premium"
+            element={user ? <Premium /> : <Navigate to="/" />}
           />
         </Routes>
       </main>

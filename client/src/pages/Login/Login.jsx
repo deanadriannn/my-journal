@@ -22,7 +22,7 @@ const Login = () => {
         <input type="password" placeholder="Password" className="login-input" onChange={(e) => setPassword(e.target.value)} value={password} />
 
         <button type="submit" id="login-button" disabled={isLoading}>Log in</button>
-        <p id="new-user-text">Don't have account?</p>
+        <p id="new-user-text">Don't have an account?</p>
         <a href="/register" id="register-link">Register</a>
       </form>
     </div>

@@ -11,17 +11,31 @@ const Profile = () => {
   const { user } = useAuthContext()
   const { logout } = useLogout()
   const [journals, setJournals] = useState([])
+  const [favoriteJournals, setFavoriteJournals] = useState([])
 
   useEffect(() => {
     const fetchJournals = async () => {
+      let response
       try {
-        const response = await axios.get('http://localhost:8080/api/journal/profile', {
-          headers: {
-            'Authorization': `Bearer ${user.token}`
+        if (user.role === 'penulis') {
+          response = await axios.get('http://localhost:8080/api/journal/profile', {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
+          })
+          setJournals(response.data.reverse())
+        }
+        else if (user.role === 'pembaca') {
+          const storedFavoriteJournals = JSON.parse(localStorage.getItem(`favoriteJournals_${user.username}`));
+          if (storedFavoriteJournals) {
+            setFavoriteJournals(storedFavoriteJournals);
+            setJournals(storedFavoriteJournals);
+          } else {
+            setFavoriteJournals([]);
+            setJournals([]);
           }
-        })
 
-        setJournals(response.data.reverse())
+        }
       } catch (error) {
         alert(error)
       }
@@ -45,23 +59,32 @@ const Profile = () => {
       });
 
       window.location.reload();
+      const updatedJournals = journals.filter(journal => journal._id !== journalId);
+      setJournals(updatedJournals);
     } catch (error) {
       alert('Failed to delete journal. Please try again.');
     }
+  }
+
+  const handleRemoveFavorite = (journalId) => {
+    // Menghapus jurnal dari daftar favoriteJournals
+    const updatedFavoriteJournals = favoriteJournals.filter(journal => journal._id !== journalId);
+    setFavoriteJournals(updatedFavoriteJournals);
+
+    // Mengupdate localStorage favoriteJournals
+    localStorage.setItem(`favoriteJournals_${user.username}`, JSON.stringify(updatedFavoriteJournals));
+    window.location.reload();
   }
 
   return (
     <div className="profile-wrapper">
       <div className="profile">
         <div className="photo-profile">
-          <label htmlFor="profile-picker">
-            <img src={photoProfile} />
-            <input type="file" name="profile-picker" id="profile-picker" hidden accept="image/jpeg, image/png, image/jpg" />
-          </label>
+          <img src={photoProfile} />
         </div>
         <div className="user-info">
           <p>{user.username}</p>
-          <p>pembaca/penulis</p>
+          <p>{user.role}</p>
         </div>
         <button onClick={handleClick}>
           Log out
@@ -75,9 +98,15 @@ const Profile = () => {
             <Link to={`/journal/${journal._id}`}>
               <JournalDetails journal={journal} />
             </Link>
-            <button className="material-symbols-outlined" onClick={() => handleDelete(journal._id)}>
-              delete
-            </button>
+            {user.role === 'penulis' ? (
+              <button className="material-symbols-outlined" onClick={() => handleDelete(journal._id)}>
+                delete
+              </button>
+            ) : (
+              <button className="material-symbols-outlined" onClick={() => handleRemoveFavorite(journal._id)}>
+                delete
+              </button>
+            )}
           </div>
         ))}
       </div>

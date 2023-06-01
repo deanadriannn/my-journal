@@ -22,3 +22,9 @@
   margin-bottom: 0;
   font-size: 10px;
 }
+
+@media (max-width: 768px) {
+  .journal-details h1 {
+    font-size: 15px;
+  }
+}

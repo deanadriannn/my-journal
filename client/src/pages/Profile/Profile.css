@@ -96,10 +96,12 @@
   color: red;
   border: none;
   background-color: transparent;
+  padding: 0;
 }
 
 .profile button:hover {
   cursor: pointer;
+  border-bottom: 1px solid red;
 }
 
 /* media queries */

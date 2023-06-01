@@ -52,10 +52,30 @@
   font-weight: 600;
 }
 
+#login-link:hover {
+  border-bottom: 1px solid white;
+}
+
 #register-button:hover {
   cursor: pointer;
   background-color: white;
   color: black;
+}
+
+.radio {
+  display: flex;
+}
+
+.radio input {
+  width: 10px;
+}
+
+.radio label {
+  font-size: 15px;
+}
+
+label[for="pembaca"] {
+  margin-right: 60px;
 }
 
 @media (max-width: 768px) {
@@ -70,5 +90,12 @@
   #have-account-text,
   #login-link {
     font-size: 10px;
+  }
+}
+
+@media(max-width: 425px) {
+  .radio {
+    flex-direction: column;
+    margin-left: 10%;
   }
 }

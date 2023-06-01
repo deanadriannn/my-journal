@@ -1,5 +1,6 @@
 // journalController
 import Journal from '../models/journal.js';
+import User from '../models/user.js';
 import { v2 as cloudinary } from 'cloudinary';
 import cloudinaryConfig from '../middleware/cloudinary.config.js';
 
@@ -19,6 +20,32 @@ export const getJournalsForOwner = async (req, res) => {
   try {
     const journals = await Journal.find({ user_id });
     res.json(journals);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+export const getFavoritedJournals = async (req, res) => {
+  const user_id = req.user._id
+  try {
+    const user = await User.findById(user_id).populate('favoriteJournals').exec();
+    const journals = user.favoriteJournals
+    res.json(journals);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+export const pushJournalToFavorite = async (req, res) => {
+  const user_id = req.user._id;
+  const journalId = req.params.id;
+
+  try {
+    const user = await User.findById(user_id);
+    const journal = await Journal.findById(journalId);
+    user.favoriteJournals.push(journal);
+    await user.save();
+    res.status(202).json({ success: true });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -70,14 +97,6 @@ export const deleteJournal = async (req, res) => {
 
     const deletedJournal = await Journal.deleteOne({ _id: journalId });
     res.status(200).json(deletedJournal);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-}
-
-export const updateJournal = async (req, res) => {
-  try {
-    const updatedJournal = await Journal.updateOne({ _id: req.params.id }, { $set: req.body })
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

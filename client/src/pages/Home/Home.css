@@ -2,6 +2,7 @@
 
 .home-wrapper {
   padding: 30px 20px;
+  width: 60%;
 }
 
 .plus-icon {
@@ -13,6 +14,41 @@
   top: 90px;
 }
 
+.add-favorite-button {
+  border: none;
+  background-color: transparent;
+  color: rgb(23, 207, 23);
+  padding: 0;
+  margin-left: 0;
+}
+
+.add-favorite-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.premium-icon {
+  width: 100px;
+  position: fixed;
+  z-index: 999;
+  right: 0;
+  margin-right: 60px;
+  top: 90px;
+}
+
+.journal:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.plus-icon:hover {
+  opacity: 0.5;
+}
+
+.premium-icon:hover {
+  opacity: 0.5;
+}
+
 @media(min-width: 768px) {
   .home-wrapper {
     padding: 30px 60px;
@@ -20,5 +56,12 @@
 
   .plus-icon {
     margin-right: 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .premium-icon {
+    margin-right: 20px;
+    width: 50px;
   }
 }

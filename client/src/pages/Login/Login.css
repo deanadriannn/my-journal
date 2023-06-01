@@ -52,6 +52,10 @@
   font-weight: 600;
 }
 
+#register-link:hover {
+  border-bottom: 1px solid white;
+}
+
 #login-button:hover {
   cursor: pointer;
   background-color: white;
