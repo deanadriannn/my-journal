@@ -92,7 +92,7 @@ const Profile = () => {
       </div>
 
       <div className="library">
-        <h1 id="library-title">Library</h1>
+        <h1 id="library-title">{user.role === 'penulis' ? 'Library' : 'Favorite'}</h1>
         {journals.map((journal) => (
           <div key={journal._id}>
             <Link to={`/journal/${journal._id}`}>

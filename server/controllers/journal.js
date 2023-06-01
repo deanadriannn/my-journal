@@ -25,32 +25,6 @@ export const getJournalsForOwner = async (req, res) => {
   }
 }
 
-export const getFavoritedJournals = async (req, res) => {
-  const user_id = req.user._id
-  try {
-    const user = await User.findById(user_id).populate('favoriteJournals').exec();
-    const journals = user.favoriteJournals
-    res.json(journals);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-}
-
-export const pushJournalToFavorite = async (req, res) => {
-  const user_id = req.user._id;
-  const journalId = req.params.id;
-
-  try {
-    const user = await User.findById(user_id);
-    const journal = await Journal.findById(journalId);
-    user.favoriteJournals.push(journal);
-    await user.save();
-    res.status(202).json({ success: true });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-}
-
 export const getJournalById = async (req, res) => {
   try {
     const journal = await Journal.findById(req.params.id);

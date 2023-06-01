@@ -26,7 +26,7 @@ const Navbar = ({ onSearch }) => {
           </Link>
         </div>
         <div className="search-bar">
-          <input type="text" className="search-input" placeholder="search" onChange={(e) => setSearchValue(e.target.value)} />
+          <input type="text" className="search-input" placeholder="search" onChange={(e) => setSearchValue(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSearch()} tabIndex="0" />
           <a href="#">
             <img src={search} onClick={handleSearch} />
           </a>
