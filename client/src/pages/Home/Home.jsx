@@ -14,12 +14,21 @@ const Home = ({ searchValue }) => {
 
   useEffect(() => {
     const fetchJournals = async () => {
+      let response
       try {
-        const response = await axios.get('http://localhost:8080/api/journal', {
-          headers: {
-            'Authorization': `Bearer ${user.token}`
-          }
-        })
+        if (user.isPremium) {
+          response = await axios.get('http://localhost:8080/api/journal', {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
+          })
+        } else {
+          response = await axios.get('http://localhost:8080/api/journal/standard', {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
+          })
+        }
 
         setJournals(response.data.reverse())
       } catch (error) {

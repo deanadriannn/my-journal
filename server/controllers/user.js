@@ -27,10 +27,11 @@ export const signupUser = async (req, res) => {
 
   try {
     const user = await User.signup(username, password, role);
+    const isPremium = user.isPremium
 
     const token = createToken(user._id);
 
-    res.status(200).json({ username, token, role })
+    res.status(200).json({ username, token, role, isPremium })
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

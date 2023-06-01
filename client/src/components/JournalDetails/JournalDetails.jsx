@@ -5,7 +5,7 @@ const JournalDetails = ({ journal }) => {
   return (
     <div className="journal-wrapper">
       <div className="journal-details">
-        <h1>{journal.title}</h1>
+        <h1>{journal.title} {journal.isPremium && '(Premium)'}</h1>
         <p>{journal.author}</p>
       </div>
     </div>

@@ -1,5 +1,6 @@
 // journalController
 import Journal from '../models/journal.js';
+import User from '../models/user.js';
 import { v2 as cloudinary } from 'cloudinary';
 import cloudinaryConfig from '../middleware/cloudinary.config.js';
 
@@ -30,6 +31,16 @@ export const getJournalById = async (req, res) => {
     res.json(journal);
   } catch (error) {
     res.status(404).json({ message: error.message });
+  }
+}
+
+export const getStandardJournals = async (req, res) => {
+  try {
+    const isPremium = false
+    const journals = await Journal.find({ isPremium })
+    res.json(journals)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
   }
 }
 
