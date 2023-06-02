@@ -16,6 +16,10 @@ app.use(express.json({ limit: '50mb' }));
 app.use('/api/journal', journalRoute);
 app.use('/api/user', userRoute);
 
+app.get('/', (req, res) => {
+  res.send('Hello to Journal API')
+})
+
 const startServer = async () => {
   try {
     connectDB(process.env.MONGODB_URL);
