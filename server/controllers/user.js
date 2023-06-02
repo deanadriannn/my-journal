@@ -36,3 +36,20 @@ export const signupUser = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 }
+
+export const makePremium = async (req, res) => {
+  const { username } = req.params
+
+  try {
+    // Melakukan update pada dokumen berdasarkan ID
+    const user = await User.findOne({ username });
+    if (user) {
+      user.isPremium = true;
+      const updatedUser = await user.save();
+      res.json(updatedUser);
+    }
+
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
