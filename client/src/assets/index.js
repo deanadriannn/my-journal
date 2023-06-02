@@ -4,6 +4,9 @@ import profile from './profile.svg';
 import photoProfile from './logo.jpg'
 import pdf from './test.pdf'
 import premium from './premium.svg'
+import danaLogo from './dana-logo.jpg'
+import gopayLogo from './gopay-logo.jpg'
+import ovoLogo from './ovo-logo.jpg'
 
 export {
   plusIcon,
@@ -11,5 +14,8 @@ export {
   profile,
   photoProfile,
   pdf,
-  premium
+  premium,
+  danaLogo,
+  gopayLogo,
+  ovoLogo
 }

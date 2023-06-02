@@ -16,13 +16,13 @@ const Home = ({ searchValue }) => {
     const fetchJournals = async () => {
       let response
       try {
-        if (user.isPremium) {
+        if (user.isPremium || user.role === 'penulis') {
           response = await axios.get('http://localhost:8080/api/journal', {
             headers: {
               'Authorization': `Bearer ${user.token}`
             }
           })
-        } else {
+        } else if (!user.isPremium) {
           response = await axios.get('http://localhost:8080/api/journal/standard', {
             headers: {
               'Authorization': `Bearer ${user.token}`
@@ -85,7 +85,7 @@ const Home = ({ searchValue }) => {
             <img src={plusIcon} className="plus-icon" />
           </Link>
         )}
-        {!user.isPremium && (
+        {!user.isPremium && user.role === 'pembaca' && (
           <Link to="/premium">
             <img src={premium} className="premium-icon" />
           </Link>
